@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/env coffee
+sys: require('sys')
+
+prefix:        process.env['TM_CURRENT_WORD']
+current_line:  process.env['TM_CURRENT_LINE']
+column_number: process.env['TM_COLUMN_NUMBER']
+
+dialog:        process.env['DIALOG']
+
+module_name: current_line.match(new RegExp("(\\w+)\.${prefix || ''}$"))[1]
+module:  require(module_name)
+methods: []
+regexp:  new RegExp("^$prefix")
+
+for name, func of module
+  methods.push(name) if (!prefix? || name.match(regexp)) #and (name isnt prefix)
+
+if methods.length == 1
+  sys.print methods[0]
+else
+  # TODO until we get a menu selector
+  methods: methods.sort()
+  sys.p methods
+
+# sys.p
+# http.createS
+# http.</string>
+	<key>fallbackInput</key>
+	<string>word</string>
+	<key>input</key>
+	<string>selection</string>
+	<key>keyEquivalent</key>
+	<string>~</string>
+	<key>name</key>
+	<string>Module method autocomplete</string>
+	<key>output</key>
+	<string>insertAsSnippet</string>
+	<key>scope</key>
+	<string>source.coffee</string>
+	<key>uuid</key>
+	<string>8F719D34-1AFB-4CA9-944A-8B953938DB92</string>
+</dict>
+</plist>
