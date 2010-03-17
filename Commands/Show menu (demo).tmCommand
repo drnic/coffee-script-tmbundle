@@ -45,13 +45,15 @@ menu: (options) -&gt;
     &lt;/plist&gt;
     "
   menuItems
-  res: null
+  res: "init"
   dialog: process.createChildProcess dialog_cmd, ["-u"]
-  dialog.addListener "exit", (code) -&gt;
-    dialog.close()
   dialog.addListener "output", (data) -&gt;
-    res: data.strip()
-  dialog.write menuItems
+    p "data: ${data}"
+    res: data
+  dialog.addListener "error", (data) -&gt;
+    p "error: ${data}"
+  dialog.write(menuItems)
+  dialog.close()
   res
 
 p menu ['Option 1', null, 'Option 2', 'Options 3']
