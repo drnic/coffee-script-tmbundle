@@ -7,8 +7,7 @@
 	<key>command</key>
 	<string>#!/usr/bin/env ruby
 
-p ENV['TM_FILEPATH']
-p `coffee #{ ENV['TM_FILEPATH']} -p`</string>
+print `coffee #{ ENV['TM_FILEPATH']} -c -o /tmp/`</string>
 	<key>input</key>
 	<string>none</string>
 	<key>keyEquivalent</key>
