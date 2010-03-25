@@ -13,7 +13,7 @@
 	<key>scope</key>
 	<string>source.coffee</string>
 	<key>tabTrigger</key>
-	<string>claw</string>
+	<string>cla</string>
 	<key>uuid</key>
 	<string>49286152-D1FC-475C-9139-F9CA673D407D</string>
 </dict>
