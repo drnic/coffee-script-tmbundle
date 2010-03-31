@@ -7,13 +7,25 @@
 	<key>command</key>
 	<string>#!/usr/bin/env ruby
 
-print `coffee #{ ENV['TM_FILEPATH']} -c -o /tmp/`</string>
+target_path = '/tmp/'
+
+doc = STDIN.read
+if ENV['TM_PROJECT_DIRECTORY'] &amp;&amp; doc &amp;&amp; doc =~ /^# js: (.*)$/
+  target_path = File.join(ENV['TM_PROJECT_DIRECTORY'], $1)
+end
+
+unless File.exist?(target_path)
+  require "fileutils"
+  FileUtils.mkdir_p target_path
+end
+print `coffee #{ ENV['TM_FILEPATH']} -c -o #{target_path}`
+</string>
 	<key>input</key>
-	<string>none</string>
+	<string>document</string>
 	<key>keyEquivalent</key>
 	<string>@s</string>
 	<key>name</key>
-	<string>Validate and Save</string>
+	<string>Validate, Compile and Save</string>
 	<key>output</key>
 	<string>showAsTooltip</string>
 	<key>scope</key>
