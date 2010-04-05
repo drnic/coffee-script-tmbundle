@@ -7,7 +7,7 @@
 	<key>command</key>
 	<string>#!/usr/bin/env ruby
 
-target_path = '/tmp/'
+target_path = ENV['TM_DIRECTORY']
 
 doc = STDIN.read
 if ENV['TM_PROJECT_DIRECTORY'] &amp;&amp; doc &amp;&amp; doc =~ /^# js: (.*)$/
