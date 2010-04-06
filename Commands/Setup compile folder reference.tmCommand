@@ -13,7 +13,7 @@ tm_dir:
 tm_proj_dir: process.env['TM_PROJECT_DIRECTORY']
 
 path: process.env['TM_DIRECTORY']
-path: path.replace(new RegExp("^$tm_proj_dir"), '') if tm_proj_dir?
+path: path.replace(new RegExp("^$tm_proj_dir/?"), '') if tm_proj_dir?
 
 sys.print "# js: $path"
 </string>
