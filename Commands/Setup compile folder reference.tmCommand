@@ -3,19 +3,27 @@
 <plist version="1.0">
 <dict>
 	<key>beforeRunningCommand</key>
-	<string>saveActiveFile</string>
+	<string>nop</string>
 	<key>command</key>
 	<string>#!/usr/bin/env coffee
 
 sys: require('sys')
+fs:  require('fs')
 
-tm_dir:      
 tm_proj_dir: process.env['TM_PROJECT_DIRECTORY']
+path:        process.env['TM_DIRECTORY']
 
-path: process.env['TM_DIRECTORY']
+files: fs.readdirSync path
+for file in files
+  if file.match /.coffee$/
+    data: fs.readFileSync file
+    matches: data.match(/^# js: (.*)/)
+    if matches
+      path: matches[1]
+
 path: path.replace(new RegExp("^$tm_proj_dir/?"), '') if tm_proj_dir?
 
-sys.print "# js: $path"
+print "# js: $path"
 </string>
 	<key>input</key>
 	<string>none</string>
