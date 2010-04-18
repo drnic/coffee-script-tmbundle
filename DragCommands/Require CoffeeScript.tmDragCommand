@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/env coffee
+
+sys: require 'sys'
+path: require 'path'
+lib: path.basename(process.env['TM_DROPPED_FILE'], ".coffee")
+
+print "${lib}: require '${lib}'"
+</string>
+	<key>draggedFileExtensions</key>
+	<array>
+		<string>coffee</string>
+	</array>
+	<key>input</key>
+	<string>selection</string>
+	<key>name</key>
+	<string>Require CoffeeScript</string>
+	<key>output</key>
+	<string>insertAsSnippet</string>
+	<key>uuid</key>
+	<string>B3F458DF-ED8A-4272-96E9-DC57FAA8EE51</string>
+</dict>
+</plist>
