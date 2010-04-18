@@ -8,17 +8,19 @@
 	<string>#!/usr/bin/env ruby
 
 target_path = '/tmp/'
-
-doc = STDIN.read
+flags       = ""
+doc         = STDIN.read
 if ENV['TM_PROJECT_DIRECTORY'] &amp;&amp; doc &amp;&amp; doc =~ /^# js: (.*)$/
-  target_path = File.join(ENV['TM_PROJECT_DIRECTORY'], $1)
+  path, *flags = $1.split(/\s+/)
+  target_path  = File.join(ENV['TM_PROJECT_DIRECTORY'], path)
+  flags        = flags.join(" ")
 end
 
 unless File.exist?(target_path)
   require "fileutils"
   FileUtils.mkdir_p target_path
 end
-print `coffee #{ ENV['TM_FILEPATH']} -c -o #{target_path}`
+print `coffee #{ ENV['TM_FILEPATH']} -c -o #{target_path} #{flags}`
 </string>
 	<key>input</key>
 	<string>document</string>
